@@ -1,0 +1,22 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "cSpell.words": [
+    "autoresize",
+    "deletable",
+    "Echart",
+    "echarts",
+    "Passfield",
+    "passwordcnf",
+    "آلمان",
+    "ادمین",
+    "افزودن",
+    "پروژه",
+    "داشبورد",
+    "دامنه",
+    "کاربر",
+    "کاربران",
+    "لیست",
+    "مدیریت"
+  ]
+}

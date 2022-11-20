@@ -1,0 +1,64 @@
+version: "3"
+
+services:
+  # backend
+  analytic-backend:
+    depends_on:
+      - analytic-postgres
+      - analytic-redis
+      - analytic-rest-captcha
+    container_name: analytic-backend
+    build:
+      args:
+        - PROXY_HTTP=${PROXY_HTTP:-}
+      context: .
+      dockerfile: Dockerfile.backend
+    working_dir: /app/api
+    environment:
+      ASM_PUBLIC_APP_TEST: "false"
+      ASM_PUBLIC_APP_NS: ${ASM_PUBLIC_APP_NS:-analytic}
+      ASM_AUTH_COOKIE: ${ASM_AUTH_COOKIE:-analytic-auth-token}
+      ASM_AUTH_REFRESH_COOKIE: ${ASM_AUTH_REFRESH_COOKIE:-analytic-auth-refresh}
+      ASM_PUBLIC_AUTH_TOKEN_TTL: ${ASM_PUBLIC_AUTH_TOKEN_TTL:-900}
+      ASM_PUBLIC_AUTH_REFRESH_TOKEN_TTL: ${ASM_PUBLIC_AUTH_REFRESH_TOKEN_TTL:-43200}
+      ASM_CLICKHOUSE_SERVERS: ${ASM_CLICKHOUSE_SERVERS:-}
+
+  # front and nginx
+  analytic-web:
+    container_name: analytic-web
+    build:
+      args:
+        - PROXY_HTTP=${PROXY_HTTP:-}
+      context: .
+      dockerfile: Dockerfile.web
+    ports:
+      - 80:80
+    environment:
+      ASM_NGINX_WORKER_PROCESSES: ${ASM_NGINX_WORKER_PROCESSES:-2}
+      ASM_NGINX_WORKER_RLIMIT_NOFILE: ${ASM_NGINX_WORKER_RLIMIT_NOFILE:-1024}
+      ASM_NGINX_WORKER_CONNECTIONS: ${ASM_NGINX_WORKER_CONNECTIONS:-512}
+      ASM_NGINX_ERROR_LOG_LEVEL: ${ASM_NGINX_ERROR_LOG_LEVEL:-warn}
+      ASM_NGINX_TMPFS_CACHE_SIZE_MB: ${ASM_NGINX_TMPFS_CACHE_SIZE_MB:-128}
+      ASM_APP_PORT: ${ASM_APP_PORT:-3001}
+      ASM_PUBLIC_BASE_URL: ${ASM_PUBLIC_BASE_URL:-/}
+    tmpfs:
+      - /nginx-tmpfs:rw,nodev,nosuid,noexec,noatime,size=${ASM_NGINX_TMPFS_CACHE_SIZE_MB:-192}m
+
+  # databases
+  analytic-redis:
+    container_name: analytic-redis
+    image: redis:6
+
+  analytic-rest-captcha:
+    container_name: analytic-captcha
+    image: ghcr.io/aasaam/rest-captcha:latest
+    command: -return-value
+
+  analytic-postgres:
+    container_name: analytic-postgres
+    environment:
+      POSTGRES_DB: ${ASM_POSTGRES_DB:-pg-db}
+      POSTGRES_USER: ${ASM_POSTGRES_USER:-pg-user}
+      POSTGRES_PASSWORD: ${ASM_POSTGRES_PASSWORD:-pg-password}
+      POSTGRES_HOST_AUTH_METHOD: trust
+    image: postgres:13

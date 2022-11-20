@@ -1,0 +1,6 @@
+# Copyright(c) 2022 aasaam software development group
+FROM node:18-alpine
+
+ADD app/api /app/api
+RUN cd /app/api && yarn install
+WORKDIR /app/api

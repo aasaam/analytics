@@ -1,0 +1,100 @@
+/* eslint-env jest */
+
+// @ts-ignore
+require('../../../../globals');
+
+const { initContainer } = require('../../../../src/Container');
+const { Config } = require('../../../../src/Config');
+const { ConfigSchema } = require('../../../../src/ConfigSchema');
+const Helper = require('../../Helper/Helper');
+
+describe(__filename.replace(__dirname, ''), () => {
+  /** @type {import('awilix').AwilixContainer} */
+  let container;
+
+  /** @type {import('../../Helper/Helper')} */
+  let helper;
+
+  beforeAll(async () => {
+    const config = new Config(ConfigSchema, {});
+    container = await initContainer(config);
+    helper = new Helper(container);
+    const seq = container.resolve('sequelize');
+
+    const { User, Uptime } = seq.models;
+    await User.destroy({
+      where: {},
+      truncate: true,
+      cascade: true,
+      restartIdentity: true,
+    });
+
+    await Uptime.destroy({
+      where: {},
+      truncate: true,
+      cascade: true,
+      restartIdentity: true,
+    });
+  });
+
+  afterAll(async () => {
+    await new Promise((resolve) => {
+      setTimeout(resolve, 100);
+    });
+    await container.dispose();
+  });
+
+  it('graphql update uptime monitoring', async () => {
+    const { token } = await helper.CreateUserHeaderAndToken(
+      'maryhelper',
+      'maryhelper@gmail.com',
+      'SA',
+      [1],
+    );
+
+    const uptime = await helper.CreateUptime();
+
+    /** @type {import('fastify').FastifyInstance} */
+    const fastify = container.resolve('Fastify').getFastify();
+
+    const graphQLEndpoint = fastify.baseURL('/graphql/graphql');
+
+    const data1 = await fastify.inject({
+      headers: {
+        cookie: `${container.resolve('Config').ASM_AUTH_COOKIE}=${token}`,
+      },
+      url: graphQLEndpoint,
+      method: 'POST',
+      payload: {
+        operationName: null,
+        query: `
+          mutation(
+              $id: Int!
+              $data: InputUptimeUpdate
+            ) {
+              UptimeUpdate(
+              id: $id
+              data: $data
+            )
+          }
+        `,
+        variables: {
+          id: uptime.id,
+          data: {
+            name: 'changeduptime',
+            url: 'https://jacynthe.com',
+            description: 'i will be add in update',
+            interval: 10,
+            ping: false,
+            options: {
+              ACTIVE: false,
+              DELETED: true,
+            },
+          },
+        },
+      },
+    });
+
+    expect(data1.statusCode).toBe(200);
+  });
+});

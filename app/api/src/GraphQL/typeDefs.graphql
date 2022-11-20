@@ -1,0 +1,404 @@
+# https://github.com/Urigo/graphql-scalars
+scalar BigInt
+scalar Byte
+scalar Currency
+scalar Date
+scalar DateTime
+scalar Duration
+scalar EmailAddress
+scalar GUID
+scalar HexColorCode
+scalar HSL
+scalar HSLA
+scalar IPv4
+scalar IPv6
+scalar ISBN
+scalar JSON
+scalar JSONObject
+scalar LocalDate
+scalar LocalEndTime
+scalar LocalTime
+scalar Long
+scalar MAC
+scalar NegativeFloat
+scalar NegativeInt
+scalar NonEmptyString
+scalar NonNegativeFloat
+scalar NonNegativeInt
+scalar NonPositiveFloat
+scalar NonPositiveInt
+scalar ObjectID
+scalar PhoneNumber
+scalar Port
+scalar PositiveFloat
+scalar PositiveInt
+scalar PostalCode
+scalar RGB
+scalar RGBA
+scalar SafeInt
+scalar Time
+scalar UnsignedFloat
+scalar UnsignedInt
+scalar URL
+scalar USCurrency
+scalar UtcOffset
+scalar UUID
+scalar Void
+
+# ********** GLOBAL *************
+input InputGlobalID {
+  id: Int!
+}
+
+input InputGlobalList {
+  filter: JSON = {}
+  lastSeen: Int
+  limit: Int = 9
+}
+
+# ********** FORGOT_PASSWORD *************
+input InputForgotPassword {
+  email: EmailAddress!
+}
+
+input InputResetPasswordUser {
+  id: Int!
+  password: String!
+}
+
+# ********** USER *************
+
+type OutputUserProfile {
+  id: Int
+  username: String
+  email: EmailAddress
+  role: String
+  lang: String
+  country: String
+  mobile: String
+  options: [Int]
+}
+
+input InputUserCreate {
+  username: String!
+  email: EmailAddress!
+  password: String!
+  role: String!
+  lang: String
+  country: String
+  mobile: String
+  options: [Int]
+}
+
+input InputUserUpdate {
+  username: String
+  email: EmailAddress
+  role: String
+  lang: String
+  country: String
+  mobile: String
+  options: JSON
+}
+input InputUpdatePassword {
+  id: Int!
+  currentPassword: String
+  newPassword: String!
+}
+
+input InputOtpGenerate {
+  id: Int!
+  currentPassword: String
+}
+
+input InputUserList {
+  filter: JSON = {}
+  lastSeen: Int
+  limit: Int = 9
+}
+
+type OutputUserListDocs {
+  id: Int
+  username: String
+  email: String
+  role: String
+  lang: String
+  country: String
+  mobile: String
+  options: [Int]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type OutputClientUserListDocs {
+  id: Int
+  username: String
+  role: String
+}
+
+type OutputUserList {
+  docs: [OutputUserListDocs]
+}
+type OutputClientUserList {
+  docs: [OutputClientUserListDocs]
+}
+
+# ********** PROJECT *************
+
+input InputScript {
+  id: String!
+}
+
+input InputProjectCreate {
+  title: String!
+  description: String
+  userAndRules: [JSONObject]!
+  options: [Int]!
+  primaryOwner: Int!
+}
+
+type OutputProjectProfile {
+  id: Int
+  title: String
+  description: String
+  publicToken: String
+  userAndRules: [JSONObject]
+  options: [Int]
+  primaryOwner: Int
+}
+
+input InputProjectUpdate {
+  title: String
+  description: String
+  userAndRules: [JSONObject]
+  options: JSON
+  primaryOwner: Int
+}
+
+type OutputProjectListDocs {
+  id: Int
+  title: String
+  publicToken: String
+  owner: [JSONObject]
+  options: [Int]
+  createdAt: DateTime
+  primaryOwner: Int
+}
+
+type OutputProjectList {
+  docs: [OutputProjectListDocs]
+}
+
+type OutputSimpleProjectListDocs {
+  id: Int
+  title: String
+}
+
+type OutputSimpleProjectList {
+  docs: [OutputSimpleProjectListDocs]
+}
+
+input InputProjectShowPPToken {
+  projectId: Int!
+  password: String!
+}
+
+input InputClientAclUpdate {
+  projectId: Int!
+  userAndRules: [JSONObject]!
+}
+
+# ********** DOMAIN *************
+
+input InputDomainCreate {
+  domain: String
+  wildcardDomain: String
+  projectId: Int!
+  description: String
+  options: [Int]!
+}
+
+input InputDomainList {
+  filter: JSON = {}
+  lastSeen: Int
+  limit: Int = 9
+}
+
+type OutputDomainListDocs {
+  id: Int
+  domain: String
+  wildcardDomain: String
+  projectId: Int
+  projectName: JSONObject
+  description: String
+  options: [Int]
+}
+
+type OutputDomainList {
+  docs: [OutputDomainListDocs]
+}
+
+type OutputDomainProfile {
+  id: Int
+  domain: String
+  wildcardDomain: String
+  ProjectId: Int
+  description: String
+  options: [Int]
+}
+
+input InputDomainUpdate {
+  domain: String
+  wildcardDomain: String
+  projectId: Int
+  description: String
+  options: JSON
+}
+
+input InputGravatar {
+  email: String!
+}
+
+type MemberListDocs {
+  id: Int
+  title: String
+  publicToken: String
+  description: String
+  rules: [String]
+  members: [JSONObject]
+}
+
+type OutputProjectOwnerList {
+  docs: [MemberListDocs]
+}
+
+# ********** UPTIME *************
+input InputUptimeCreate {
+  name: String!
+  url: String!
+  interval: Int!
+  ping: Boolean!
+  description: String
+  options: [Int]!
+}
+
+type UptimeListDocs {
+  id: Int
+  url: String
+  name: String
+  ping: Boolean
+  interval: Int
+  options: [Int]
+  description: String
+  createdAt: DateTime
+}
+
+type OutputUptimeList {
+  docs: [UptimeListDocs]
+}
+
+input InputUptimeUpdate {
+  name: String!
+  url: String!
+  interval: Int!
+  ping: Boolean
+  description: String
+  options: JSON!
+}
+
+type OutputUptimeProfile {
+  id: Int
+  url: String
+  name: String
+  ping: Boolean
+  interval: Int
+  options: [Int]
+  description: String
+}
+
+# ********** PERFORMANCE *************
+input InputPerformanceCreate {
+  name: String!
+  url: String!
+  interval: Int!
+  description: String
+  options: [Int]!
+}
+
+type PerformanceListDocs {
+  id: Int
+  url: String
+  name: String
+  interval: Int
+  options: [Int]
+  createdAt: DateTime
+}
+
+type OutputPerformanceList {
+  docs: [PerformanceListDocs]
+}
+
+type OutputPerformanceProfile {
+  id: Int
+  url: String
+  name: String
+  description: String
+  interval: Int
+  options: [Int]
+}
+
+input InputPerformanceUpdate {
+  name: String!
+  url: String!
+  interval: Int!
+  description: String
+  options: JSON!
+}
+
+# Mutation list
+type Mutation {
+  UserResetPassword(data: InputResetPasswordUser): String
+  UserCreate(data: InputUserCreate): JSONObject
+  UserUpdate(id: Int!, data: InputUserUpdate): Int
+  UserUpdatePassword(data: InputUpdatePassword): JSON
+  OtpGenerate(data: InputOtpGenerate): String
+  UserDelete(data: InputGlobalID): Int
+  ProjectCreate(data: InputProjectCreate): Int
+  ProjectUpdate(id: Int!, data: InputProjectUpdate): Int
+  ProjectUpdateUserRules(data: InputClientAclUpdate): Int
+  ProjectDelete(data: InputGlobalID): Int
+  PrivateTokenRegenerate(data: InputGlobalID): String
+  DomainCreate(data: InputDomainCreate): Int
+  DomainUpdate(id: Int!, data: InputDomainUpdate): Int
+  DomainDelete(data: InputGlobalID): Int
+  UptimeCreate(data: InputUptimeCreate): Int
+  UptimeDelete(data: InputGlobalID): Int
+  UptimeUpdate(id: Int!, data: InputUptimeUpdate): Int
+  PerformanceCreate(data: InputPerformanceCreate): Int
+  PerformanceDelete(data: InputGlobalID): Int
+  PerformanceUpdate(id: Int!, data: InputPerformanceUpdate): Int
+}
+
+# Query list
+type Query {
+  UserForgotPassword(data: InputForgotPassword): String
+  UserProfile(data: InputGlobalID): OutputUserProfile
+  Gravatar(data: InputGravatar): String
+  UserList(args: InputUserList): OutputUserList
+  UserListForAdminClient(
+    projectId: Int!
+    args: InputUserList
+  ): OutputClientUserList
+  ProjectProfile(data: InputGlobalID): OutputProjectProfile
+  ProjectList(args: InputGlobalList): OutputProjectList
+  ClientProjectList(args: InputGlobalList): OutputProjectOwnerList
+  ProjectSimpleList(args: InputGlobalList): OutputSimpleProjectList
+  ProjectShowPrivateToken(data: InputProjectShowPPToken): JSONObject
+  ClientScript(data: InputScript): String
+
+  DomainList(args: InputDomainList): OutputDomainList
+  DomainProfile(data: InputGlobalID): OutputDomainProfile
+  UptimeList(args: InputGlobalList): OutputUptimeList
+  UptimeProfile(data: InputGlobalID): OutputUptimeProfile
+  PerformanceList(args: InputGlobalList): OutputPerformanceList
+  PerformanceProfile(data: InputGlobalID): OutputPerformanceProfile
+}
