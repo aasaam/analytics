@@ -31,7 +31,7 @@ class ProjectListREST {
 
       preHandler: async (req, reply) => {
         // @ts-ignore
-        if (req.query.t !== Config.ASM_COLLECTOR_API_KEY) {
+        if (!req.query.t || req.query.t !== Config.ASM_COLLECTOR_API_KEY) {
           return e403.reply(reply);
         }
 

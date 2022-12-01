@@ -32,7 +32,7 @@ class ProjectDomainList {
       include: [
         {
           model: Project,
-          attributes: ['publicToken'],
+          attributes: ['publicToken', 'privateToken'],
           where: {
             enabled: true,
             [Op.not]: {
@@ -68,11 +68,11 @@ class ProjectDomainList {
 
     const result = {};
     allProject.forEach((project) => {
-      const { publicToken } = project.dataValues.Project;
+      const { publicToken, privateToken } = project.dataValues.Project;
       const { domain, wildcardDomain } = project.dataValues;
       if (!result[`${publicToken}`]) {
         result[`${publicToken}`] = {
-          p: publicToken,
+          p: privateToken,
           d: [],
           w: [],
         };
