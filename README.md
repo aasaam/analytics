@@ -6,8 +6,8 @@
     Management server for aasaam analytics
   </p>
   <p>
-    <a href="https://github.com/aasaam/analytics/actions/workflows/test.yml" target="_blank">
-      <img src="https://github.com/aasaam/analytics/actions/workflows/test.yml/badge.svg" alt="Test" />
+    <a href="https://github.com/aasaam/analytics/actions/workflows/build.yml" target="_blank">
+      <img src="https://github.com/aasaam/analytics/actions/workflows/build.yml/badge.svg" alt="Build" />
     </a>
     <a href="https://github.com/aasaam/analytics/blob/master/LICENSE">
       <img alt="License" src="https://img.shields.io/github/license/aasaam/analytics">
