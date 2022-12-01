@@ -2,7 +2,10 @@
 app/api/coverage/
 app/api/node_modules/
 
+app/api/build-assets/script.js
+
 # front-cp
 app/front-cp/.nuxt/
 app/front-cp/dist/
 app/front-cp/node_modules/
+

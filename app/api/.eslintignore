@@ -1,2 +1,3 @@
 node_modules/
 /src/Repository/AnalyticFront/script.js
+./build-assets/script.js

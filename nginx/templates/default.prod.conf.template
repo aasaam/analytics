@@ -12,8 +12,6 @@ events {
 
 http {
 
-  userid_name ${ASM_PUBLIC_APP_NS}_hid;
-
   limit_req_zone $binary_remote_addr zone=app_req_limit_per_ip:16m rate=${ASM_NGINX_LIMIT_RPS}r/s;
   limit_conn_zone $binary_remote_addr zone=app_conn_limit_per_ip:16m;
   limit_conn_status 429;
@@ -50,6 +48,10 @@ http {
     index index.html;
 
     include /etc/nginx/common-server.conf;
+
+    location = /robots.txt {
+      return 200 "User-agent: *\nDisallow: /";
+    }
 
     location ${ASM_PUBLIC_BASE_URL}_nuxt {
       expires max;
