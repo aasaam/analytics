@@ -36,6 +36,7 @@ const ConfigSchema = {
       type: 'string',
       default: 'localhost',
     },
+
     ASM_CLICKHOUSE_SERVERS: {
       type: 'string',
       // @ts-ignore
@@ -115,7 +116,7 @@ const ConfigSchema = {
       type: 'string',
       description: 'Application name space. **Do not change after deployment**',
       pattern: '[a-z][a-z\\-][a-z]',
-      default: 'analytic-test',
+      default: 'analytic',
     },
 
     ASM_PUBLIC_APP_READ_ONLY: {

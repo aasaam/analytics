@@ -1,15 +1,17 @@
 const { Organization } = require('@aasaam/information');
 
 module.exports = {
-  // do not change these variables
-  aasaam: Organization.fa,
-  copyright: 'تمامی حقوق متعلق به {name} می‌باشد.',
-  dir: 'rtl',
-  projectName: 'عنوان پروژه',
-  projectShortName: 'عنوان',
-  projectDescription: 'توضیحات بیشتر در مورد پروژه',
+  aasaam: Organization.en,
+  copyright: `Copyright ${Organization.en.name}`,
+  dir: 'ltr',
+  projectName: 'آنالیتیکس',
+  projectShortName: `آنالیتیکس`,
+  projectDescription: `تجزیه و تحلیل بازدید‌ها و رخداد‌ها`,
+  projectFooter: `آنالیتیکس | کاری از ${Organization.en.name}`,
   loading: 'بارگزاری...',
-  pageNotFound: 'یافت نشد',
+  contactSupport: 'با {name} تماس بگیرید',
+  telSupport: 'شماره {name}',
+  pageNotFound: 'یافت نشد.',
 
   // ## Login
   login: 'ورود',

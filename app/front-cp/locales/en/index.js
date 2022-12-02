@@ -1,19 +1,17 @@
-// we dont have analytics info yet.
-// @TODO:  create me please
-const Organization = require('@aasaam/information/logo/service/htm/info-en');
+const { Organization } = require('@aasaam/information');
 
 module.exports = {
-  aasaam: Organization,
-  copyright: 'Copyright {name}',
+  aasaam: Organization.en,
+  copyright: `Copyright ${Organization.en.name}`,
   dir: 'ltr',
-  // projectName: Organization.name,
-  // projectShortName: Organization.name,
-  // projectDescription: Organization.description,
-  projectFooter: 'ANALYTIC | Powered By aasaam',
+  projectName: `analytics`,
+  projectShortName: `analytics`,
+  projectDescription: `analytics of page view and events`,
+  projectFooter: `analytics | Powered By ${Organization.en.name}`,
   loading: 'Loading...',
   contactSupport: 'Contact {name} support',
   telSupport: 'Tel {name}',
-  pageNotFound: 'page    dddNotFound',
+  pageNotFound: 'Page not found',
 
   // ## Dashboard
   session: 'Session',
