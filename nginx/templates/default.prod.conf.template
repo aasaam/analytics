@@ -18,7 +18,8 @@ http {
 
   # development access log
   log_format dev_combined '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" $server_port';
-  access_log /dev/stdout dev_combined;
+  # access_log /dev/stdout dev_combined;
+  access_log off;
 
   include /etc/nginx/common-http.conf;
 
@@ -31,6 +32,11 @@ http {
 
   server {
     listen 80 default_server;
+    server_name _;
+    return 301 https://$host$request_uri;
+  }
+
+  server {
     listen 443 ssl http2 default_server;
 
     ssl_certificate /cert/fullchan.pem;
@@ -49,7 +55,7 @@ http {
     root /web-app;
     index index.html;
 
-    include /etc/nginx/common-server.conf;
+    # include /etc/nginx/common-server.conf;
 
     location = /robots.txt {
       return 200 "User-agent: *\nDisallow: /";
