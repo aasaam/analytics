@@ -47,7 +47,6 @@
     "testEnvironment": "node"
   },
   "devDependencies": {
-    "@faker-js/faker": "^6.0.0-beta.0",
     "@jest/test-sequencer": "^28",
     "@types/ioredis": "^4",
     "@types/jest": "^27",
@@ -93,6 +92,7 @@
     "joi": "^17",
     "jose": "^4",
     "libphonenumber-js": "^1",
+    "@faker-js/faker": "^6.0.0-beta.0",
     "lodash": "^4",
     "mercurius": "^9.5",
     "mqemitter-redis": "^4",

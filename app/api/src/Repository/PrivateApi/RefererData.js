@@ -116,7 +116,9 @@ class RefererData {
       LIMIT ${maxLimit}
       `;
 
-    result.result = await this.ClickHouse.query(query).toPromise();
+    result.result = await this.ClickHouse.getConnection()
+      .query(query)
+      .toPromise();
 
     return result;
   }

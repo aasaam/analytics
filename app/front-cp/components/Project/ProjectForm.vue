@@ -23,7 +23,7 @@
               <v-col cols="12" md="6" lg="4">
                 <ValidationProvider
                   v-slot:default="{ errors, valid }"
-                  :rules="{ required: true, regex: /[a-zA-Z0-9\s]+/ }"
+                  rules="required|min:4"
                   :name="$t('title')"
                 >
                   <v-text-field

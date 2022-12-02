@@ -71,6 +71,7 @@ http {
       add_header Cache-Control "public, immutable";
       alias /web-app;
       index index.html;
+      sub_filter '<!--[__NGINX__ENV_REPLACEMENT_RUNTIME__]-->' "<script>var applicationBaseURL = '${ASM_PUBLIC_BASE_URL}';</script>";
       try_files $uri $uri/ /index.html;
     }
 

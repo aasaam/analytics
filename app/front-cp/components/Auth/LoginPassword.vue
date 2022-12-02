@@ -90,7 +90,7 @@ export default {
       show: false,
       type: 'AP',
       user: {
-        email: 'adminer@gmail.com',
+        email: '',
         password: '',
         captcha: null,
       },
