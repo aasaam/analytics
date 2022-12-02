@@ -7,6 +7,10 @@ const schema = {
   properties: {
     types: {
       type: 'array',
+      items: {
+        type: 'string',
+      },
+      enum: ['PageView', 'Users', 'Sessions'],
       require: true,
     },
     lang: {

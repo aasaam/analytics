@@ -7,6 +7,7 @@ const schema = {
   properties: {
     type: {
       type: 'string',
+      enum: ['URL', 'CanonicalURL'],
       require: true,
     },
     lang: {

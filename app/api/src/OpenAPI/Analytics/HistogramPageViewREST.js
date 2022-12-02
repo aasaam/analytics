@@ -20,7 +20,7 @@ class PageViewCountREST {
       method: 'POST',
       schema: {
         description: 'Get histogram Count page views - session - users',
-        operationId: 'HistogramPageView',
+        // operationId: 'HistogramPageView',
         tags: ['AnalyticsPageView'],
         body: {
           $ref: 'HistogramPageView#',
