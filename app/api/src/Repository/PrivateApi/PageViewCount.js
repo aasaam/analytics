@@ -8,8 +8,8 @@ const {
 } = require('../../Schema/ErrorMessage');
 
 class PageViewCount {
-  constructor({ clickHouseClient }) {
-    this.clickHouseClient = clickHouseClient;
+  constructor({ ClickHouse }) {
+    this.ClickHouse = ClickHouse;
   }
 
   /**
@@ -98,7 +98,7 @@ class PageViewCount {
       FROM Records
       WHERE ${whereAnd.join(' AND ')}`;
 
-    const queryResult = await this.clickHouseClient.query(query).toPromise();
+    const queryResult = await this.ClickHouse.query(query).toPromise();
 
     [result.result] = queryResult;
 

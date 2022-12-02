@@ -59,9 +59,6 @@ const initContainer = async (Config) => {
   container.register({
     ClickHouse: asClass(ClickHouse, {
       lifetime: Lifetime.SINGLETON,
-      // async dispose(i) {
-      //   await i.interval();
-      // },
     }),
   });
 
@@ -78,25 +75,6 @@ const initContainer = async (Config) => {
   const mQEmitter = await container.resolve('Redis').getMQEmitter();
 
   const sequelize = await container.resolve('EntityManager').getSequelize();
-  const ClickHouseInstance = container.resolve('ClickHouse');
-  const clickHouseClient = await ClickHouseInstance.getClient();
-
-  await ClickHouseInstance.checkConnection();
-  // if (!clickHouseConnectionSuccess) {
-  //   console.log({
-  //     s: 'failed',
-  //     clickHouseConnectionSuccess,
-  //     pid: process.env.pm_id,
-  //   });
-
-  //   process.exit(1);
-  // } else {
-  //   console.log({
-  //     s: 'OK',
-  //     clickHouseConnectionSuccess,
-  //     pid: process.env.pm_id,
-  //   });
-  // }
 
   const graphqlTypeDefs = await graphqlTypeDefsLoader();
 
@@ -107,7 +85,6 @@ const initContainer = async (Config) => {
 
     graphqlTypeDefs: asValue(graphqlTypeDefs),
     graphqlResolvers: asValue(graphqlResolvers),
-    clickHouseClient: asValue(clickHouseClient),
   });
 
   // Repository

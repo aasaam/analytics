@@ -2,11 +2,7 @@ const { ClickHouse } = require('clickhouse');
 
 class ClickH {
   constructor({ Config, ClickRootCa, ClickClientFullChain, ClickClientKey }) {
-    this.selected =
-      Config.ASM_CLICKHOUSE_SERVERS[
-        Math.floor(Math.random() * Config.ASM_CLICKHOUSE_SERVERS.length)
-      ];
-
+    this.servers = Config.ASM_CLICKHOUSE_SERVERS;
     /**
      * @type {import('clickhouse').ClickHouse}
      * @private
@@ -16,30 +12,21 @@ class ClickH {
     this.ClickRootCa = ClickRootCa;
     this.ClickClientFullChain = ClickClientFullChain;
     this.ClickClientKey = ClickClientKey;
+
+    setInterval(() => {
+      this.intervalChecker();
+    }, 5000);
   }
 
-  async checkConnection() {
-    const result = await Promise.race([
-      new Promise((resolve) => {
-        setTimeout(() => {
-          resolve([
-            {
-              SUCCESS: 0,
-            },
-          ]);
-        }, 2000);
-      }),
-      this.connection.query('SELECT 1 AS SUCCESS').toPromise(),
-    ]);
-
-    return result[0].SUCCESS === 1;
+  getConnection() {
+    return this.connection;
   }
 
-  async getClient() {
-    const uri = new URL(this.selected);
-
-    if (this.connection === null) {
-      this.connection = new ClickHouse({
+  async intervalChecker() {
+    for (let i = 0; i < this.servers; i += 1) {
+      const server = this.servers[`${i}`];
+      const uri = new URL(server);
+      const connection = new ClickHouse({
         host: `${uri.protocol}${uri.hostname}`,
         port: uri.port,
         basicAuth: {
@@ -47,7 +34,9 @@ class ClickH {
           password: uri.password,
         },
         config: {
-          session_timeout: 1,
+          session_timeout: uri.searchParams.has('session_timeout')
+            ? uri.searchParams.get('session_timeout')
+            : 5,
           database: uri.pathname.replace(/\//, ''),
         },
         // add ca certificate files to the connection
@@ -64,8 +53,21 @@ class ClickH {
         format: 'json',
         raw: false,
       });
+      try {
+        // eslint-disable-next-line no-await-in-loop
+        const result = await connection
+          .query('SELECT 1 AS SUCCESS')
+          .toPromise();
+        // @ts-ignore
+        if (Array.isArray(result) && result[0] && result[0].SUCCESS === 1) {
+          this.connection = connection;
+          break;
+        }
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
+      }
     }
-    return this.connection;
   }
 }
 

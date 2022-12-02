@@ -9,8 +9,8 @@ const {
 } = require('../../Schema/ErrorMessage');
 
 class RefererData {
-  constructor({ clickHouseClient }) {
-    this.clickHouseClient = clickHouseClient;
+  constructor({ ClickHouse }) {
+    this.ClickHouse = ClickHouse;
   }
 
   /**
@@ -116,7 +116,7 @@ class RefererData {
       LIMIT ${maxLimit}
       `;
 
-    result.result = await this.clickHouseClient.query(query).toPromise();
+    result.result = await this.ClickHouse.query(query).toPromise();
 
     return result;
   }

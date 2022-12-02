@@ -75,7 +75,6 @@
     "@fastify/rate-limit": "^6",
     "@fastify/swagger": "^6",
     "@graphql-tools/schema": "^8",
-    "altair-fastify-plugin": "^4",
     "argon2": "^0",
     "async": "^3",
     "await-to-js": "^3",

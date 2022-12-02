@@ -10,8 +10,8 @@ const {
 } = require('../../Schema/ErrorMessage');
 
 class CursorEntityPageView {
-  constructor({ clickHouseClient }) {
-    this.clickHouseClient = clickHouseClient;
+  constructor({ ClickHouse }) {
+    this.ClickHouse = ClickHouse;
   }
 
   /**
@@ -64,13 +64,11 @@ class CursorEntityPageView {
     if (cursorID) {
       cursorValue = cursorFormatter(cursorID);
     } else {
-      const [{ LastCursorID }] = await this.clickHouseClient
-        .query(
-          `SELECT MAX(CursorID)
+      const [{ LastCursorID }] = await this.ClickHouse.query(
+        `SELECT MAX(CursorID)
             AS LastCursorID
             FROM Records;`,
-        )
-        .toPromise();
+      ).toPromise();
 
       result.result.cursorID = LastCursorID;
       return result;
@@ -100,7 +98,7 @@ class CursorEntityPageView {
         GROUP BY ${group}
       `;
 
-    const rows = await this.clickHouseClient.query(query).toPromise();
+    const rows = await this.ClickHouse.query(query).toPromise();
 
     let maxCurserID = 0;
 

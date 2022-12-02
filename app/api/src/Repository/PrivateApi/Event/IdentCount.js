@@ -8,8 +8,8 @@ const {
 } = require('../../../Schema/ErrorMessage');
 
 class IdentCount {
-  constructor({ clickHouseClient }) {
-    this.clickHouseClient = clickHouseClient;
+  constructor({ ClickHouse }) {
+    this.ClickHouse = ClickHouse;
   }
 
   /**
@@ -97,7 +97,7 @@ class IdentCount {
       GROUP BY ${group}
     `;
 
-    const queryResult = await this.clickHouseClient.query(query).toPromise();
+    const queryResult = await this.ClickHouse.query(query).toPromise();
 
     [result.result] = queryResult;
     return result;

@@ -9,8 +9,8 @@ const {
 } = require('../../../Schema/ErrorMessage');
 
 class ActionCount {
-  constructor({ clickHouseClient }) {
-    this.clickHouseClient = clickHouseClient;
+  constructor({ ClickHouse }) {
+    this.ClickHouse = ClickHouse;
   }
 
   /**
@@ -91,7 +91,7 @@ class ActionCount {
       LIMIT ${maxLimit}
       `;
 
-    const queryResult = await this.clickHouseClient.query(query).toPromise();
+    const queryResult = await this.ClickHouse.query(query).toPromise();
 
     const resultMap = {};
     queryResult.forEach((element) => {

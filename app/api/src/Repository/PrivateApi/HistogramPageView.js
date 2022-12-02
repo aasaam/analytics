@@ -11,8 +11,8 @@ const {
 } = require('../../Schema/ErrorMessage');
 
 class HistogramPageView {
-  constructor({ clickHouseClient }) {
-    this.clickHouseClient = clickHouseClient;
+  constructor({ ClickHouse }) {
+    this.ClickHouse = ClickHouse;
   }
 
   /**
@@ -115,7 +115,7 @@ class HistogramPageView {
       `;
 
     /** @type {any[]} */
-    const queryResult = await this.clickHouseClient.query(query).toPromise();
+    const queryResult = await this.ClickHouse.query(query).toPromise();
 
     const histogram = {
       Time: [],
