@@ -61,7 +61,7 @@ http {
       return 200 "User-agent: *\nDisallow: /";
     }
 
-    location ${ASM_PUBLIC_BASE_URL}_nuxt {
+    location ${ASM_PUBLIC_BASE_URL}${ASM_FRONT_CP_PATH} {
       expires max;
       add_header Pragma public;
       add_header Cache-Control "public, immutable";
