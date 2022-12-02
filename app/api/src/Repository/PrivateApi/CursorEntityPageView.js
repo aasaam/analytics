@@ -64,11 +64,13 @@ class CursorEntityPageView {
     if (cursorID) {
       cursorValue = cursorFormatter(cursorID);
     } else {
-      const [{ LastCursorID }] = await this.ClickHouse.query(
-        `SELECT MAX(CursorID)
+      const [{ LastCursorID }] = await this.ClickHouse.getConnection()
+        .query(
+          `SELECT MAX(CursorID)
             AS LastCursorID
             FROM Records;`,
-      ).toPromise();
+        )
+        .toPromise();
 
       result.result.cursorID = LastCursorID;
       return result;
@@ -98,7 +100,7 @@ class CursorEntityPageView {
         GROUP BY ${group}
       `;
 
-    const rows = await this.ClickHouse.query(query).toPromise();
+    const rows = await this.ClickHouse.getConnection().query(query).toPromise();
 
     let maxCurserID = 0;
 

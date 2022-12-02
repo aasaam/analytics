@@ -13,6 +13,7 @@ class ClickH {
     this.ClickClientFullChain = ClickClientFullChain;
     this.ClickClientKey = ClickClientKey;
 
+    this.intervalChecker();
     setInterval(() => {
       this.intervalChecker();
     }, 5000);
@@ -23,7 +24,7 @@ class ClickH {
   }
 
   async intervalChecker() {
-    for (let i = 0; i < this.servers; i += 1) {
+    for (let i = 0; i < this.servers.length; i += 1) {
       const server = this.servers[`${i}`];
       const uri = new URL(server);
       const connection = new ClickHouse({

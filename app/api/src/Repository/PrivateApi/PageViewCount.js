@@ -98,7 +98,9 @@ class PageViewCount {
       FROM Records
       WHERE ${whereAnd.join(' AND ')}`;
 
-    const queryResult = await this.ClickHouse.query(query).toPromise();
+    const queryResult = await this.ClickHouse.getConnection()
+      .query(query)
+      .toPromise();
 
     [result.result] = queryResult;
 

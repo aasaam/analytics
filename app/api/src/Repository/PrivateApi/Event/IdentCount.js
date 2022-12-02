@@ -97,7 +97,9 @@ class IdentCount {
       GROUP BY ${group}
     `;
 
-    const queryResult = await this.ClickHouse.query(query).toPromise();
+    const queryResult = await this.ClickHouse.getConnection()
+      .query(query)
+      .toPromise();
 
     [result.result] = queryResult;
     return result;

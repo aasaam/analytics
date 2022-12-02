@@ -115,7 +115,9 @@ class HistogramPageView {
       `;
 
     /** @type {any[]} */
-    const queryResult = await this.ClickHouse.query(query).toPromise();
+    const queryResult = await this.ClickHouse.getConnection()
+      .query(query)
+      .toPromise();
 
     const histogram = {
       Time: [],

@@ -91,7 +91,9 @@ class ActionCount {
       LIMIT ${maxLimit}
       `;
 
-    const queryResult = await this.ClickHouse.query(query).toPromise();
+    const queryResult = await this.ClickHouse.getConnection()
+      .query(query)
+      .toPromise();
 
     const resultMap = {};
     queryResult.forEach((element) => {
