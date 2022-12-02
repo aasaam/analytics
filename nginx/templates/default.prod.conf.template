@@ -55,6 +55,10 @@ http {
     root /web-app;
     index index.html;
 
+    location / {
+      return 404;
+    }
+
     # include /etc/nginx/common-server.conf;
 
     location = /robots.txt {
@@ -65,16 +69,15 @@ http {
       expires max;
       add_header Pragma public;
       add_header Cache-Control "public, immutable";
+      alias /web-app;
+      index index.html;
+      try_files $uri $uri/ /index.html;
     }
 
     location ${ASM_PUBLIC_BASE_URL}_icons {
       expires max;
       add_header Pragma public;
       add_header Cache-Control "public, immutable";
-    }
-
-    location ${ASM_PUBLIC_BASE_URL} {
-      try_files $uri $uri/ /index.html;
     }
 
     location ${ASM_PUBLIC_BASE_URL}api {
