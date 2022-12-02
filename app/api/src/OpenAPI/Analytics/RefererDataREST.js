@@ -17,7 +17,7 @@ class PageViewCountREST {
       url: apiUrl,
       method: 'POST',
       schema: {
-        description: 'Get referer data',
+        description: 'Get referer data [SessionReferer or PageViewReferer]',
         operationId: 'RefererData',
         tags: ['AnalyticsPageView'],
         body: {

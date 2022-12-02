@@ -15,7 +15,7 @@ class PageViewCountREST {
       url: apiUrl,
       method: 'POST',
       schema: {
-        description: 'Get top urls data',
+        description: 'Get top urls data type: [URL, CanonicalURL]',
         operationId: 'TopUrls',
         tags: ['AnalyticsPageView'],
         body: {
