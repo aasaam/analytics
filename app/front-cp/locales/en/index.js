@@ -88,11 +88,10 @@ module.exports = {
   noResult: 'No Result',
   domainEdit: 'Edit Domain',
   deleteDomain: 'Delete Domain',
-
+  English: 'English',
+  Persian: 'فارسی',
   // ## PROJECT
   title: 'Title',
-  projectDescription: 'Project Description',
-  projectName: 'Project Name',
   areYouSureDelete: 'Are You Sure To Delete Below Item:',
   deleteProject: 'Delete Project',
   nope: 'No',
@@ -184,6 +183,7 @@ module.exports = {
   },
   // ## validations
   validations: {
+    requiredProject: 'Project is required.',
     objectRequired: '{item} is required',
     alpha: 'The {_field_} field may only contain alphabetic characters',
     alpha_num: 'The {_field_} field may only contain alpha-numeric characters',

@@ -10,6 +10,7 @@
     "aasaam-dist": "./scripts/aasaam-dist.sh",
     "aasaam-static": "./scripts/aasaam-static.sh",
     "analytic-favicon": "./scripts/analytic-favicon.sh",
+    "analytic-manifest": "./manifest/build-manifest.js",
     "make": "npm run aasaam-static && nuxt generate --modern=server && npm run aasaam-dist",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "lint:style": "stylelint \"**/*.{vue,css}\" --ignore-path .gitignore",

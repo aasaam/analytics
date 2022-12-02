@@ -262,7 +262,7 @@ export default {
       );
       console.log(data, '00');
       if (data) {
-        console.log('---deleteddvsvsdv');
+        // console.log('---deleteddvsvsdv');
         const result = await this.callTableListApi(
           {
             lastSeen: undefined,
@@ -272,7 +272,7 @@ export default {
           this.moduleInfo.url,
         );
         this.userDocs = result;
-        console.log('---deleted');
+        // console.log('---deleted');
         // this.dialog = false;
       }
       if (err) {

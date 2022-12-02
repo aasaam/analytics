@@ -84,6 +84,15 @@
                   :looping-list-o="innerProject.userAndRules"
                   @sendData="receiveRules"
                 />
+
+                <v-alert
+                  v-show="userRuleWatch"
+                  border="top"
+                  color="red lighten-2"
+                  dark
+                >
+                  {{ $t('userRuleNotEntered') }}
+                </v-alert>
               </v-col>
 
               <!-- actions -->
@@ -154,6 +163,7 @@ export default {
     return {
       temporaryOptions: {},
       isDisabled: false,
+      userRuleWatch: false,
     };
   },
   computed: {
@@ -167,6 +177,17 @@ export default {
     },
   },
 
+  watch: {
+    // if this.innerProject.userAndRules not empty then userRuleWatch is false
+    'innerProject.userAndRules': {
+      handler() {
+        if (this.innerProject.userAndRules.length > 0) {
+          this.userRuleWatch = false;
+        }
+      },
+      deep: true,
+    },
+  },
   methods: {
     onSendPrime(data) {
       this.$set(this.innerProject, 'primaryOwner', data.id);
@@ -203,6 +224,11 @@ export default {
     async creatingMethod() {
       const validity = await this.$refs.obs.validate();
       if (!validity) {
+        return;
+      }
+      // check if userAndRules is empty return error
+      if (this.innerProject.userAndRules.length === 0) {
+        this.userRuleWatch = true;
         return;
       }
       const [, data] = await to(

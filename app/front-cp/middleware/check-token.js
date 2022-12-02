@@ -1,5 +1,5 @@
 export default function ({ store, redirect, route, error }) {
-  console.log('before every route => check-token.js');
+  // console.log('before every route => check-token.js');
   store.dispatch('user/auth/refreshToken');
   // if not authenticated redirect to login
   if (!store.getters['user/auth/GET_AUTHENTICATED']) {

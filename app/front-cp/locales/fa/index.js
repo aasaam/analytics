@@ -12,7 +12,8 @@ module.exports = {
   contactSupport: 'با {name} تماس بگیرید',
   telSupport: 'شماره {name}',
   pageNotFound: 'یافت نشد.',
-
+  English: 'English',
+  Persian: 'فارسی',
   // ## Login
   login: 'ورود',
   admin: 'ادمین',
@@ -98,6 +99,7 @@ module.exports = {
   deleteProjectWarning:
     'با حذف این پروژه ، تمام دامنه های آن نیز حذف خواهند شد.',
   editAcl: 'ویرایش دسترسی ها',
+  userRuleNotEntered: 'قوانین کاربر وارد نشده است',
 
   // ## USERS
   username: 'نام کاربری',
@@ -109,7 +111,7 @@ module.exports = {
   editProfile: 'ویرایش پروفایل',
   editData: 'ویرایش اطلاعات',
   editPassword: 'ویرایش رمز عبور',
-
+  deleteUser: 'حذف کاربر',
   otherError: 'خطایی رخ داده است',
   errMsg: 'فیلد {item} : {rule}',
 
@@ -167,6 +169,7 @@ module.exports = {
   },
   // ## validations
   validations: {
+    requiredProject: 'نام پروژه ضروری است.',
     objectRequired: '{item} ضروری است.',
     alpha: 'فیلد {_field_} فقط شامل حروف است.',
     alpha_num: 'فیلد {_field_} فقط شامل حروف و اعداد است.',

@@ -19,6 +19,8 @@ RUN cd /app/front-cp && \
   pwd && \
   ls -la && \
   ls -la ./node_modules && \
+  npm run analytic-manifest && \
+  npm run analytic-favicon && \
   npm run make && \
   ls -lah dist
 

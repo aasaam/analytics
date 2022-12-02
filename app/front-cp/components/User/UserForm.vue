@@ -189,7 +189,7 @@ export default {
       if (!validity) {
         return;
       }
-      console.log(this.user, '----addd');
+      // console.log(this.user, '----addd');
       const [err, data] = await to(
         this.$store.dispatch('user/addUser', this.user),
       );
