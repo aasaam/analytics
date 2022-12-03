@@ -9,8 +9,8 @@ const schema = {
       type: 'array',
       items: {
         type: 'string',
+        enum: ['PageView', 'Users', 'Sessions'],
       },
-      enum: ['PageView', 'Users', 'Sessions'],
       require: true,
     },
     lang: {
