@@ -147,8 +147,8 @@ export default {
       type: Object,
       required: false,
       default: () => ({
-        domain: '',
-        wildcardDomain: '',
+        domain: null,
+        wildcardDomain: null,
         ProjectId: 0,
       }),
     },
