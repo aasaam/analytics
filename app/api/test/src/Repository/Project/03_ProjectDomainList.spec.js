@@ -97,7 +97,7 @@ describe(__filename.replace(__dirname, ''), () => {
 
     const disableProject = await createProject.addProject({
       title: 'my disable project',
-      defaultDomain: 'never.com',
+      defaultDomain: 'hello.com',
       primaryOwner: enableUser.id,
       description: 'hello test for list',
       options: [1, 2],
@@ -125,7 +125,7 @@ describe(__filename.replace(__dirname, ''), () => {
 
     await createDomain.addDomain({
       domain: 'enabledomain.com',
-      wildcardDomain: '',
+      wildcardDomain: null,
       description: 'enable domain there for list',
       options: [1],
       projectId: enableProject.id,
@@ -158,7 +158,7 @@ describe(__filename.replace(__dirname, ''), () => {
     });
 
     await createDomain.addDomain({
-      domain: '',
+      domain: null,
       wildcardDomain: '*.mine.tld',
       description: 'there for list',
       options: [1],

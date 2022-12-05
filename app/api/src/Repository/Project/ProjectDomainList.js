@@ -32,7 +32,7 @@ class ProjectDomainList {
       include: [
         {
           model: Project,
-          attributes: ['publicToken', 'privateToken'],
+          attributes: ['publicToken', 'privateToken', 'defaultDomain'],
           where: {
             enabled: true,
             [Op.not]: {
@@ -68,8 +68,10 @@ class ProjectDomainList {
 
     const result = {};
     allProject.forEach((project) => {
-      const { publicToken, privateToken } = project.dataValues.Project;
-      const { domain, wildcardDomain } = project.dataValues;
+      // console.log(project);
+      const { publicToken, privateToken, defaultDomain } =
+        project.dataValues.Project;
+      const { domain, wildcardDomain } = project;
       if (!result[`${publicToken}`]) {
         result[`${publicToken}`] = {
           p: privateToken,
@@ -77,12 +79,21 @@ class ProjectDomainList {
           w: [],
         };
       }
+
       if (domain) {
         result[`${publicToken}`].d.push(domain);
       }
+
+      result[`${publicToken}`].d.push(defaultDomain);
+
       if (wildcardDomain) {
         result[`${publicToken}`].w.push(wildcardDomain);
       }
+    });
+
+    // unique domain
+    Object.keys(result).forEach((key) => {
+      result[`${key}`].d = [...new Set(result[`${key}`].d)];
     });
 
     return result;
