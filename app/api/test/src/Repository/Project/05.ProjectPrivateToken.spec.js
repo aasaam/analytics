@@ -62,6 +62,7 @@ describe(__filename.replace(__dirname, ''), () => {
 
     const pData = await createProject.addProject({
       title: 'donyaye Eghtesad',
+      defaultDomain: 'test.com',
       publicToken: '123654',
       description: 'hey hello',
       primaryOwner: user.id,

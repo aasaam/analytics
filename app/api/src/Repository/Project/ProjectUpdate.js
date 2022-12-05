@@ -20,6 +20,7 @@ class ProjectUpdate {
       title,
       publicToken,
       description,
+      defaultDomain,
       userAndRules,
       options,
       primaryOwner,
@@ -61,6 +62,7 @@ class ProjectUpdate {
     };
 
     initialValues.title = title;
+    initialValues.defaultDomain = defaultDomain;
 
     if (publicToken) {
       initialValues.publicToken = publicToken;

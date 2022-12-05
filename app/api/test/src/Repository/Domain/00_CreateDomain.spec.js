@@ -71,6 +71,7 @@ describe(__filename.replace(__dirname, ''), () => {
 
     const projectID = await createProject.addProject({
       title: 'donyssasfh g',
+      defaultDomain: 'test.com',
       publicToken: '1236s57',
       description: 'hey shesllo',
       userAndRules: [
@@ -85,7 +86,7 @@ describe(__filename.replace(__dirname, ''), () => {
     expect(
       await createDomain.addDomain({
         domain: 'aa.com',
-        wildcardDomain: '',
+        wildcardDomain: null,
         description: 'there',
         options: [1],
         projectId: projectID.id,
@@ -94,7 +95,7 @@ describe(__filename.replace(__dirname, ''), () => {
 
     expect(
       await createDomain.addDomain({
-        domain: '',
+        domain: null,
         wildcardDomain: '*.example.com',
         description: 'there you go',
         options: [1],
@@ -114,7 +115,7 @@ describe(__filename.replace(__dirname, ''), () => {
 
     await expect(
       createDomain.addDomain({
-        domain: '',
+        domain: null,
         wildcardDomain: '+',
         description: 'there',
         options: [1],
@@ -124,8 +125,8 @@ describe(__filename.replace(__dirname, ''), () => {
 
     await expect(
       createDomain.addDomain({
-        domain: '',
-        wildcardDomain: '',
+        domain: null,
+        wildcardDomain: null,
         description: 'there',
         options: [1],
         projectId: projectID.id,
@@ -135,7 +136,7 @@ describe(__filename.replace(__dirname, ''), () => {
     await expect(
       createDomain.addDomain({
         domain: '127.0.0.3',
-        wildcardDomain: '',
+        wildcardDomain: null,
         description: 'there',
         options: [1],
         projectId: projectID.id,
@@ -145,7 +146,7 @@ describe(__filename.replace(__dirname, ''), () => {
     await expect(
       createDomain.addDomain({
         domain: 'hey.com',
-        wildcardDomain: '',
+        wildcardDomain: null,
         description: 'there',
         options: [1],
       }),

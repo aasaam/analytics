@@ -150,6 +150,7 @@ input InputScript {
 
 input InputProjectCreate {
   title: String!
+  defaultDomain: String!
   description: String
   userAndRules: [JSONObject]!
   options: [Int]!
@@ -161,6 +162,7 @@ type OutputProjectProfile {
   title: String
   description: String
   publicToken: String
+  defaultDomain: String
   userAndRules: [JSONObject]
   options: [Int]
   primaryOwner: Int
@@ -169,6 +171,7 @@ type OutputProjectProfile {
 input InputProjectUpdate {
   title: String
   description: String
+  defaultDomain: String
   userAndRules: [JSONObject]
   options: JSON
   primaryOwner: Int

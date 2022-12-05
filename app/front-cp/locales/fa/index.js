@@ -100,6 +100,7 @@ module.exports = {
     'با حذف این پروژه ، تمام دامنه های آن نیز حذف خواهند شد.',
   editAcl: 'ویرایش دسترسی ها',
   userRuleNotEntered: 'قوانین کاربر وارد نشده است',
+  defaultDomain: 'دامنه پیش فرض',
 
   // ## USERS
   username: 'نام کاربری',

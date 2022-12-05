@@ -85,7 +85,7 @@ describe(__filename.replace(__dirname, ''), () => {
     const pData = await createProject.addProject({
       title: 'for profile test',
       description: 'hey hello',
-
+      defaultDomain: 'prise.com',
       userAndRules: [
         {
           UserId: user.dataValues.id,
@@ -102,6 +102,7 @@ describe(__filename.replace(__dirname, ''), () => {
     expect(
       await createProject.addProject({
         title: 'donyaye Eghtesad',
+        defaultDomain: 'rpm.com',
         publicToken: '123654',
         description: 'hey hello',
         userAndRules: [
@@ -117,6 +118,7 @@ describe(__filename.replace(__dirname, ''), () => {
     expect(
       await createProject.addProject({
         title: 'test2',
+        defaultDomain: 'mouse.com',
         publicToken: '123654a1s2',
         description: 'hey hello',
         options: [1],
@@ -137,6 +139,7 @@ describe(__filename.replace(__dirname, ''), () => {
     expect(
       await createProject.addProject({
         title: 'maryychecjkkk',
+        defaultDomain: 'sunday.com',
         description: 'hey this is a description',
         userAndRules: [
           {
@@ -151,6 +154,7 @@ describe(__filename.replace(__dirname, ''), () => {
     await expect(
       createProject.addProject({
         title: 'donyayeEf',
+        defaultDomain: 'monday.com',
         description: 'hey hello there',
       }),
     ).rejects.toThrowError();
@@ -158,6 +162,7 @@ describe(__filename.replace(__dirname, ''), () => {
     await expect(
       createProject.addProject({
         title: 'notvalid',
+        defaultDomain: 'exuceme.com',
         userAndRules: [
           {
             UserId: user.dataValues.id,
@@ -171,6 +176,7 @@ describe(__filename.replace(__dirname, ''), () => {
     await expect(
       createProject.addProject({
         description: 'hey hello there',
+        defaultDomain: 'away.com',
         userAndRules: [
           {
             UserId: user.dataValues.id,

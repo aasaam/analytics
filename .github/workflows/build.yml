@@ -52,7 +52,7 @@ jobs:
             -e ASM_PUBLIC_APP_TEST='true' \
             -e ASM_SMTP_SENDER="noreply@gmail.com" \
             -e ASM_SMTP_URI="smtp://username:password@$TEST_CI_NAMESPACE-mail:1025/?pool=true" \
-            $TEST_CI_NAMESPACE
+            # $TEST_CI_NAMESPACE /app/api/ci.sh
 
           echo "ok"
 
@@ -71,6 +71,7 @@ jobs:
 
       - name: 🚀 Build and push
         run: |
+          curl -L -o script.js 'https://raw.githubusercontent.com/aasaam/analytics-client/master/dist/script.js'
           docker-compose -f docker-compose.prod.yml build
           echo "List of docker images"
           docker images

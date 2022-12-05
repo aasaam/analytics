@@ -72,6 +72,7 @@ describe(__filename.replace(__dirname, ''), () => {
     const enableProject = await createProject.addProject({
       title: 'my project for list',
       publicToken: 'project00080',
+      defaultDomain: 'test.com',
       options: [1],
       description: 'hello test for list',
       primaryOwner: enableUser.id,

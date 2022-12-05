@@ -91,6 +91,7 @@ describe(__filename.replace(__dirname, ''), () => {
 
     const project1 = await createProject.addProject({
       title: 'my primaryowner is user1',
+      defaultDomain: 'test.com',
       options: [1],
       primaryOwner: user1.id,
       userAndRules: [
@@ -103,6 +104,7 @@ describe(__filename.replace(__dirname, ''), () => {
 
     const project2 = await createProject.addProject({
       title: 'its test',
+      defaultDomain: 'start.com',
       primaryOwner: user2.id,
       options: [1],
       userAndRules: [

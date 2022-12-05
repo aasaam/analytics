@@ -21,6 +21,11 @@ const base = Joi.object().keys({
     'string.base': errorConstMerge.INVALID_STRING,
   }),
 
+  defaultDomain: Joi.string().domain().required().messages({
+    'string.domain': errorConstMerge.INVALID_DOMAIN,
+    'any.required': errorConstMerge.ISREQUIRE_FIELD,
+  }),
+
   userAndRules: Joi.array().allow(null).optional(),
 
   primaryOwner: Joi.number().required().messages({

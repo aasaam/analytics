@@ -37,10 +37,10 @@ describe(__filename.replace(__dirname, ''), () => {
   it('sign in', async () => {
     const createUser = container.resolve('UserCreateRepository');
     container.resolve('UserAuthRepository');
-    const captcha = container.resolve('CaptchaRepository');
-    const capResult = await captcha.generateCaptcha();
-    const redis = await container.resolve('Redis');
-    const red = await redis.getRedis();
+    // const captcha = container.resolve('CaptchaRepository');
+    // const capResult = await captcha.generateCaptcha();
+    // const redis = await container.resolve('Redis');
+    // const red = await redis.getRedis();
 
     const userData = {
       username: 'tokenuser',
@@ -71,10 +71,10 @@ describe(__filename.replace(__dirname, ''), () => {
         data: {
           email: userData.email,
           password: userData.password,
-          captcha: {
-            id: capResult.id,
-            value: await red.get(`captcha:${capResult.id}`),
-          },
+          // captcha: {
+          //   id: capResult.id,
+          //   value: await red.get(`captcha:${capResult.id}`),
+          // },
         },
       },
     });

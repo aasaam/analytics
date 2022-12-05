@@ -105,6 +105,7 @@ class Helper {
     const project = await createProject.addProject({
       title: 'sample helper',
       publicToken: '1236s57',
+      defaultDomain: 'test.com',
       description: 'hey sample helper',
       userAndRules: [
         {
@@ -117,7 +118,7 @@ class Helper {
 
     const dom = await createDomain.addDomain({
       domain: 'samplehelper.com',
-      wildcardDomain: '',
+      wildcardDomain: null,
       description: 'there sample helper',
       options: [1],
       projectId: project.id,
@@ -157,6 +158,7 @@ class Helper {
     const project = await createProject.addProject({
       title: 'sample helper',
       publicToken: '1236s57',
+      defaultDomain: 'testnews.com',
       description: 'hey sample helper',
       userAndRules: [
         {

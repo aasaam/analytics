@@ -20,7 +20,7 @@
             @submit.prevent="onSubmit"
           >
             <v-row>
-              <v-col cols="12" md="6" lg="4">
+              <v-col cols="12" md="6" lg="3">
                 <ValidationProvider
                   v-slot:default="{ errors, valid }"
                   rules="required|min:4"
@@ -55,7 +55,29 @@
                   @sendPrimaryUserValue="onSendPrime"
                 />
               </v-col>
-              <v-col v-if="!editMood" cols="12" md="6" lg="4">
+              <v-col cols="12" md="6" lg="3">
+                <ValidationProvider
+                  v-slot:default="{ errors, valid }"
+                  :rules="{
+                    required: true,
+                    isDomain: { wild: false },
+                  }"
+                  :name="$t('defaultDomain')"
+                >
+                  <v-text-field
+                    v-model.trim="innerProject.defaultDomain"
+                    color="light-blue darken-1"
+                    :error-messages="errors"
+                    :success="valid"
+                    type="text"
+                    dir="ltr"
+                    outlined
+                    :label="$t('defaultDomain')"
+                  >
+                  </v-text-field>
+                </ValidationProvider>
+              </v-col>
+              <v-col v-if="!editMood" cols="12" md="6" lg="3">
                 <ProjectCreationOption @sendOptions="updateOptions" />
               </v-col>
               <v-col v-if="editMood" cols="12" md="4" lg="3">

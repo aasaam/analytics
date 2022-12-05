@@ -84,6 +84,7 @@ describe(__filename.replace(__dirname, ''), () => {
 
     const enableProject = await createProject.addProject({
       title: 'my project for list',
+      defaultDomain: 'fake.com',
       publicToken: 'project00080',
       options: [1],
       description: 'hello test for list',
@@ -98,6 +99,7 @@ describe(__filename.replace(__dirname, ''), () => {
 
     const disableProject = await createProject.addProject({
       title: 'my disable project',
+      defaultDomain: 'test.com',
       publicToken: 'project00090',
       description: 'hello test for list',
       options: [1, 2],
@@ -112,7 +114,7 @@ describe(__filename.replace(__dirname, ''), () => {
 
     await createDomain.addDomain({
       domain: 'enabledomain.com',
-      wildcardDomain: '',
+      wildcardDomain: null,
       description: 'enable domain there for list',
       options: [1],
       projectId: enableProject.id,
@@ -120,7 +122,7 @@ describe(__filename.replace(__dirname, ''), () => {
 
     await createDomain.addDomain({
       domain: 'disabledomain.com',
-      wildcardDomain: '',
+      wildcardDomain: null,
       description: 'disable domain there for list',
       options: [2],
       projectId: enableProject.id,
@@ -128,14 +130,14 @@ describe(__filename.replace(__dirname, ''), () => {
 
     await createDomain.addDomain({
       domain: 'domainwithdisableproject.com',
-      wildcardDomain: '',
+      wildcardDomain: null,
       description: 'there for list',
       options: [1],
       projectId: disableProject.id,
     });
 
     await createDomain.addDomain({
-      domain: '',
+      domain: null,
       wildcardDomain: '*.mine.tld',
       description: 'there for list',
       options: [1],

@@ -32,6 +32,7 @@ class ProjectProfile {
             'title',
             'publicToken',
             'description',
+            'defaultDomain',
             'options',
             'primaryOwner',
           ],

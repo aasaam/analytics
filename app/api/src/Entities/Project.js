@@ -27,6 +27,11 @@ module.exports = (sequelize) =>
         unique: true,
         allowNull: false,
       },
+      defaultDomain: {
+        type: DataTypes.STRING,
+        unique: true,
+        allowNull: true,
+      },
       title: {
         type: DataTypes.STRING,
         unique: true,

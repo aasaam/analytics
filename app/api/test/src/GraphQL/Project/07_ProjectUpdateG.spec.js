@@ -89,6 +89,7 @@ describe(__filename.replace(__dirname, ''), () => {
           data: {
             title: 'updatedyou',
             description: 'hey sample helper',
+            defaultDomain: 'google.com',
             userAndRules: [
               {
                 UserId: user.dataValues.id,

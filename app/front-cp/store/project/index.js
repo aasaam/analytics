@@ -100,6 +100,7 @@ export const actions = {
           query: `mutation (
             $title: String!
             $description: String
+            $defaultDomain: String!
             $userAndRules: [JSONObject]!
             $options: [Int]!
             $primaryOwner: Int!
@@ -107,6 +108,7 @@ export const actions = {
               ProjectCreate(
                 data: {
                   title: $title
+                  defaultDomain: $defaultDomain
                   description: $description
                   userAndRules: $userAndRules
                   options: $options

@@ -5,6 +5,8 @@ ARG PROXY_HTTP
 
 ADD app/api /app/api
 
+ADD script.js /app/api/build-assets/script.js
+
 RUN export LANG=en_US.utf8 ; \
   export LC_ALL=C.UTF-8 ; \
   export HTTP_PROXY=$PROXY_HTTP ; \

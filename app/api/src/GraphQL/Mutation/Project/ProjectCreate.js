@@ -6,6 +6,7 @@ module.exports = async (_, { data }, { container, token }) => {
 
   checkToken(token, _, [userRoles.SUPERADMIN, userRoles.ADMIN]);
 
+  console.log(data);
   const project = await ProjectCreateRepository.addProject(data);
   return project.id;
 };

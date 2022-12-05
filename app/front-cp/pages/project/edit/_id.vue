@@ -72,6 +72,7 @@ export default {
           'title',
           'description',
           'options',
+          'defaultDomain',
           'userAndRules',
           'publicToken',
           'primaryOwner',

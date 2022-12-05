@@ -21,6 +21,7 @@ class ProjectCreate {
    *
    * @param {Object} data
    * @param {String} data.title
+   * @param {String} data.defaultDomain
    * @param {String} data.publicToken
    * @param {String} data.description
    * @param {object[]} data.userAndRules
@@ -32,6 +33,7 @@ class ProjectCreate {
       title,
       publicToken,
       description,
+      defaultDomain,
       userAndRules,
       options = [projectOption.ACTIVE],
       primaryOwner,
@@ -59,6 +61,7 @@ class ProjectCreate {
     const initialValues = {
       title,
       description: description || null,
+      defaultDomain,
       options,
       privateToken: null,
       publicToken: null,
@@ -76,6 +79,7 @@ class ProjectCreate {
     }
     initialValues.privateToken = this.generatePrivateToken();
     initialValues.primaryOwner = primaryOwner;
+    initialValues.defaultDomain = defaultDomain;
 
     userAndRules.forEach((element) => {
       const valid = element.rules.every((elem) => projectRule.includes(elem));
@@ -115,6 +119,7 @@ class ProjectCreate {
 
       result = project.dataValues;
     } catch (error) {
+      console.log(error);
       await t.rollback();
       SequelizeErrorHandler(error);
     }

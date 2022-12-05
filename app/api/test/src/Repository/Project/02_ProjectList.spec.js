@@ -60,6 +60,7 @@ describe(__filename.replace(__dirname, ''), () => {
 
     await createProject.addProject({
       title: 'donyaye egh',
+      defaultDomain: 'test.com',
       description: 'hey hello',
       primaryOwner: user.id,
       userAndRules: [

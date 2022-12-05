@@ -50,7 +50,7 @@ class FrontScript {
       s: this.Config.ASM_COLLECTOR_SERVER_HOST,
     };
 
-    const script = await readFile('build-assets/script.js', 'utf8');
+    const script = (await readFile('build-assets/script.js', 'utf8')).trim();
 
     return script.replace('__INITIALIZE_DATA__', JSON.stringify(info));
   }

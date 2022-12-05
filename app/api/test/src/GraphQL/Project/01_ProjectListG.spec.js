@@ -76,6 +76,7 @@ describe(__filename.replace(__dirname, ''), () => {
     await createProject.addProject({
       title: 'for profile test',
       description: 'hey hello',
+      defaultDomain: 'test.com',
       userAndRules: [
         {
           UserId: user.id,

@@ -121,6 +121,7 @@ module.exports = {
             title: `project${index}`,
             publicToken: `project${index.toString().padStart(5, '0')}`,
             description: 'project dear project',
+            defaultDomain: 'test.com',
             options: [Math.floor(Math.random() * 2) + 1],
             userAndRules: [
               {
@@ -157,7 +158,7 @@ module.exports = {
         createDomain
           .addDomain({
             domain: `domain${index}.tld`,
-            wildcardDomain: '',
+            wildcardDomain: null,
             description: `there you go domain number ${index}`,
             options: [Math.floor(Math.random() * 2) + 1],
             projectId: Math.floor(Math.random() * 30) + 1,

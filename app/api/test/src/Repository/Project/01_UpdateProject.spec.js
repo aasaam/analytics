@@ -76,6 +76,7 @@ describe(__filename.replace(__dirname, ''), () => {
 
     const res = await createProject.addProject({
       title: 'donyaye Eghtesad',
+      defaultDomain: 'testone.com',
       publicToken: '123654',
       description: 'hey hello',
       userAndRules: [
@@ -90,6 +91,7 @@ describe(__filename.replace(__dirname, ''), () => {
     const res2 = await createProject.addProject({
       title: 'analytic',
       publicToken: '12365468',
+      defaultDomain: 'test.com',
       description: 'hey htm',
       userAndRules: [
         {
@@ -110,7 +112,7 @@ describe(__filename.replace(__dirname, ''), () => {
     expect(
       await createDomain.addDomain({
         domain: 'check.com',
-        wildcardDomain: '',
+        wildcardDomain: null,
         description: 'new domain same projects',
         options: [1],
         projectId: res.id,
@@ -120,7 +122,7 @@ describe(__filename.replace(__dirname, ''), () => {
     expect(
       await createDomain.addDomain({
         domain: 'mary.com',
-        wildcardDomain: '',
+        wildcardDomain: null,
         description: 'new domain same project',
         options: [1],
         projectId: res.id,
@@ -130,7 +132,7 @@ describe(__filename.replace(__dirname, ''), () => {
     expect(
       await createDomain.addDomain({
         domain: 'notrelated.com',
-        wildcardDomain: '',
+        wildcardDomain: null,
         description: 'new domain same project',
         options: [1],
         projectId: res2.id,
@@ -141,7 +143,7 @@ describe(__filename.replace(__dirname, ''), () => {
       await updateProject.updateProject(res.id, {
         title: 'mosals news',
         description: 'will change you',
-
+        defaultDomain: 'ast.com',
         options: {
           ACTIVE: true,
           DELETED: true,
@@ -165,6 +167,7 @@ describe(__filename.replace(__dirname, ''), () => {
       updateProject.updateProject(res.id, {
         title: null,
         description: 'will change you too',
+        defaultDomain: 'adb.com',
         options: {
           ACTIVE: false,
           DELETED: true,
@@ -186,6 +189,7 @@ describe(__filename.replace(__dirname, ''), () => {
       updateProject.updateProject(res.id, {
         title: null,
         description: 'will change you too',
+        defaultDomain: 'away.com',
         options: {
           ACTIVE: true,
           DELETED: false,

@@ -83,6 +83,7 @@ describe(__filename.replace(__dirname, ''), () => {
 
     const enableProject = await createProject.addProject({
       title: 'my project for list',
+      defaultDomain: 'pro.com',
       options: [1],
       description: 'hello test for list',
       primaryOwner: enableUser.id,
@@ -96,6 +97,7 @@ describe(__filename.replace(__dirname, ''), () => {
 
     const disableProject = await createProject.addProject({
       title: 'my disable project',
+      defaultDomain: 'never.com',
       primaryOwner: enableUser.id,
       description: 'hello test for list',
       options: [1, 2],
@@ -109,6 +111,7 @@ describe(__filename.replace(__dirname, ''), () => {
 
     const newpr = await createProject.addProject({
       title: 'my neww prrr',
+      defaultDomain: 'forever.com',
       primaryOwner: enableUser.id,
       description: 'hello',
       options: [1],

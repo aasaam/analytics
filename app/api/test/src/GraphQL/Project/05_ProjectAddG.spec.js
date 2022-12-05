@@ -88,6 +88,7 @@ describe(__filename.replace(__dirname, ''), () => {
           mutation(
             $title: String!
             $description: String
+            $defaultDomain: String!
             $userAndRules: [JSONObject]!
             $options: [Int]!
             $primaryOwner: Int!
@@ -97,6 +98,7 @@ describe(__filename.replace(__dirname, ''), () => {
                 title: $title
                 description: $description
                 userAndRules: $userAndRules
+                defaultDomain: $defaultDomain
                 options: $options
                 primaryOwner: $primaryOwner
               }
@@ -106,6 +108,7 @@ describe(__filename.replace(__dirname, ''), () => {
         variables: {
           title: 'test title',
           description: 'test description',
+          defaultDomain: 'tester.com',
           userAndRules: [
             {
               UserId: user.dataValues.id,
@@ -129,6 +132,7 @@ describe(__filename.replace(__dirname, ''), () => {
           mutation(
             $title: String!
             $description: String
+            $defaultDomain: String!
             $userAndRules: [JSONObject]!
             $options: [Int]!
             $primaryOwner: Int!
@@ -138,6 +142,7 @@ describe(__filename.replace(__dirname, ''), () => {
                 title: $title
                 description: $description
                 userAndRules: $userAndRules
+                defaultDomain: $defaultDomain
                 options: $options
                 primaryOwner: $primaryOwner
               }
@@ -146,6 +151,7 @@ describe(__filename.replace(__dirname, ''), () => {
         `,
         variables: {
           title: 'test title',
+          defaultDomain: 'test.com',
           description: 'test description',
           userAndRules: [
             {
@@ -160,7 +166,6 @@ describe(__filename.replace(__dirname, ''), () => {
     });
 
     const { errors } = JSON.parse(data2.body);
-
     expect(errors['0'].extensions.statusCode).toEqual(405);
   });
 });

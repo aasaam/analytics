@@ -90,6 +90,7 @@ module.exports = {
   deleteDomain: 'Delete Domain',
   English: 'English',
   Persian: 'فارسی',
+
   // ## PROJECT
   title: 'Title',
   areYouSureDelete: 'Are You Sure To Delete Below Item:',
@@ -113,6 +114,7 @@ module.exports = {
   deleteProjectWarning:
     'By deleting this project, all domain that belongs to this will be deactivate too.',
   editAcl: 'Edit Access Control List',
+  defaultDomain: 'Default Domain',
 
   // ## USERS
   username: 'Username',

@@ -72,6 +72,7 @@ describe(__filename.replace(__dirname, ''), () => {
 
     const projectID = await createProject.addProject({
       title: 'donyssasfh g',
+      defaultDomain: 'test.com',
       publicToken: '1236s57',
       description: 'hey shesllo',
       userAndRules: [
