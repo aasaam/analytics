@@ -53,10 +53,6 @@ module.exports = (sequelize) =>
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      // usersLst: {
-      //   type: DataTypes.ARRAY(DataTypes.INTEGER),
-      //   allowNull: true,
-      // },
     },
     {
       // tableName: 'projects',
