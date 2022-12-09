@@ -22,6 +22,9 @@
         <span v-if="snackbar.message[0].message === 'DUPLICATE_ENTRY'">
           {{ $t('errors.DUPLICATE_ENTRY') }}
         </span>
+        <span v-if="snackbar.message[0].message === 'INVALID_PASSWORD'">
+          {{ $t('errors.INVALID_PASSWORD') }}
+        </span>
         <span v-else>
           <!-- {{ snackbar.message[0].message }} -->
           <span v-if="typeof snackbar.message == 'string'">

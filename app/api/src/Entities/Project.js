@@ -30,7 +30,7 @@ module.exports = (sequelize) =>
       defaultDomain: {
         type: DataTypes.STRING,
         unique: true,
-        allowNull: true,
+        allowNull: false,
       },
       title: {
         type: DataTypes.STRING,
