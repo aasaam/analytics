@@ -121,7 +121,7 @@ module.exports = {
             title: `project${index}`,
             publicToken: `project${index.toString().padStart(5, '0')}`,
             description: 'project dear project',
-            defaultDomain: 'test.com',
+            defaultDomain: `domain${index}.tld`,
             options: [Math.floor(Math.random() * 2) + 1],
             userAndRules: [
               {

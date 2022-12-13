@@ -49,6 +49,8 @@ class ActionCount {
       );
     }
 
+    const cat = category.toLowerCase();
+
     const {
       startUnixTime,
       endDateUnixTime,
@@ -60,7 +62,7 @@ class ActionCount {
 
     const result = {
       query: {
-        category,
+        category: cat,
         limit: maxLimit,
         startDate: startDateProcessed,
         endDate: endDateProcessed,
@@ -78,7 +80,7 @@ class ActionCount {
       `Created BETWEEN FROM_UNIXTIME(${startUnixTime}) AND FROM_UNIXTIME(${endDateUnixTime})`,
       `PublicInstanceID = ${escaper(publicToken)}`,
       `Mode BETWEEN 100 AND 199`,
-      `ECategory = ${escaper(category)}`,
+      `ECategory = ${escaper(cat)}`,
     ];
 
     const query = `

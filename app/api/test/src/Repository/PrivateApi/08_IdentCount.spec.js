@@ -30,8 +30,8 @@ describe(__filename.replace(__dirname, ''), () => {
     time.setDate(time.getDate() - 150);
     const result = await identCount.getEIdentCount({
       publicToken: 'project00001',
-      category: 'video',
-      action: 'update',
+      category: 'Video',
+      action: 'UPDATE',
       id: '590',
       // startDate: time.toISOString(),
     });

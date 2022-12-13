@@ -58,6 +58,9 @@ class IdentHistogram {
       );
     }
 
+    const cat = category.toLowerCase();
+    const act = action.toLowerCase();
+
     const {
       startUnixTime,
       endDateUnixTime,
@@ -70,8 +73,8 @@ class IdentHistogram {
     const result = {
       query: {
         id,
-        action,
-        category,
+        action: act,
+        category: cat,
         resolution,
         startDate: startDateProcessed,
         endDate: endDateProcessed,
@@ -92,8 +95,8 @@ class IdentHistogram {
       `Created BETWEEN FROM_UNIXTIME(${startUnixTime}) AND FROM_UNIXTIME(${endDateUnixTime})`,
       `PublicInstanceID = ${escaper(publicToken)}`,
       `Mode BETWEEN 100 AND 199`,
-      `ECategory = ${escaper(category)}`,
-      `EAction = ${escaper(action)}`,
+      `ECategory = ${escaper(cat)}`,
+      `EAction = ${escaper(act)}`,
       `EIdent = ${escaper(id)}`,
     ];
 

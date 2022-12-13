@@ -36,6 +36,9 @@ const constants = {
   INVALID_REFERER_TYPE: '',
   INVALID_NUMBER: '',
   INVALID_URL_TYPE: '',
+  INVALID_CATEGORY_NAME: '',
+  INVALID_ACTION_NAME: '',
+  INVALID_ID: '',
 };
 
 const list = Object.values(constants);

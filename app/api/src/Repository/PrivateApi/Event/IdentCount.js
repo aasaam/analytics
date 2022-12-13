@@ -56,6 +56,9 @@ class IdentCount {
       );
     }
 
+    const cat = category.toLowerCase();
+    const act = action.toLowerCase();
+
     const {
       startUnixTime,
       endDateUnixTime,
@@ -66,8 +69,8 @@ class IdentCount {
     const result = {
       query: {
         id,
-        action,
-        category,
+        action: act,
+        category: cat,
         startDate: startDateProcessed,
         endDate: endDateProcessed,
         publicToken,
@@ -84,8 +87,8 @@ class IdentCount {
       `Created BETWEEN FROM_UNIXTIME(${startUnixTime}) AND FROM_UNIXTIME(${endDateUnixTime})`,
       `PublicInstanceID = ${escaper(publicToken)}`,
       `Mode BETWEEN 100 AND 199`,
-      `ECategory = ${escaper(category)}`,
-      `EAction = ${escaper(action)}`,
+      `ECategory = ${escaper(cat)}`,
+      `EAction = ${escaper(act)}`,
       `EIdent = ${escaper(id)}`,
     ];
 
