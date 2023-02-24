@@ -11,8 +11,12 @@ const base = Joi.object().keys({
   entityModule: Joi.string().required().messages({
     'any.required': errorConstMerge.ISREQUIRE_FIELD,
   }),
-  cursorID: Joi.string().optional().messages({
-    'any.only': errorConstMerge.ISREQUIRE_FIELD,
+  startDate: Joi.string().optional().messages({
+    'any.only': errorConstMerge.INVALID_DATE,
+  }),
+
+  endDate: Joi.string().optional().messages({
+    'any.only': errorConstMerge.INVALID_DATE,
   }),
 });
 

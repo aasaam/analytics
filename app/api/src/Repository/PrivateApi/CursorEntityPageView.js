@@ -1,5 +1,5 @@
 const { ErrorWithProps } = require('mercurius').default;
-const cursorFormatter = require('../../Utils/CursorFormatter');
+const formatter = require('../../Utils/DateTimeFormatter');
 const escaper = require('../../Utils/ClickhouseEscape');
 const {
   BaseCursorPageViewCountSchema,
@@ -19,14 +19,15 @@ class CursorEntityPageView {
    * @param {Object} params
    * @param {String} params.publicToken
    * @param {String} params.entityModule
-   * @param {String} [params.cursorID]
+   * @param {string} [params.startDate]
+   * @param {string} [params.endDate]
    */
-  async getCursorEntityPv({ cursorID, publicToken, entityModule }) {
+  async getCursorEntityPv({ startDate, endDate, publicToken, entityModule }) {
     const schema = BaseCursorPageViewCountSchema();
 
     try {
       await schema.validateAsync(
-        { publicToken, entityModule, cursorID },
+        { publicToken, entityModule, startDate, endDate },
         { abortEarly: false },
       );
     } catch (e) {
@@ -48,45 +49,31 @@ class CursorEntityPageView {
       );
     }
 
+    const {
+      startUnixTime,
+      endDateUnixTime,
+      startDate: startDateProcessed,
+      endDate: endDateProcessed,
+    } = formatter('8h', startDate, endDate);
+
     const result = {
       query: {
-        cursorID,
+        startDate: startDateProcessed,
+        endDate: endDateProcessed,
+        timeRangeSeconds: endDateUnixTime - startUnixTime,
         publicToken,
         entityModule,
       },
-      result: {
-        cursorID: null,
-        items: null,
-      },
+      result: {},
     };
-
-    let cursorValue = '';
-    if (cursorID) {
-      cursorValue = cursorFormatter(cursorID);
-    } else {
-      const [{ LastCursorID }] = await this.ClickHouse.getConnection()
-        .query(
-          `SELECT MAX(CursorID)
-            AS LastCursorID
-            FROM Records;`,
-        )
-        .toPromise();
-
-      result.result.cursorID = LastCursorID;
-      return result;
-    }
 
     /**
      * Build query
      */
-    const selects = [
-      `COUNT(*) AS Count`,
-      `PEntityID`,
-      `MAX(CursorID) AS LastCursorID`,
-    ];
+    const selects = [`COUNT(*) AS Count`, `PEntityID`];
     const group = `PEntityID`;
     const whereAnd = [
-      `CursorID > ${escaper(cursorValue)}`,
+      `Created BETWEEN FROM_UNIXTIME(${startUnixTime}) AND FROM_UNIXTIME(${endDateUnixTime})`,
       `PEntityModule = ${escaper(entityModule)}`,
       `PublicInstanceID = ${escaper(publicToken)}`,
       `Mode BETWEEN 0 AND 99`,
@@ -102,19 +89,13 @@ class CursorEntityPageView {
 
     const rows = await this.ClickHouse.getConnection().query(query).toPromise();
 
-    let maxCurserID = 0;
+    const cleaned = {};
 
-    result.result.items = rows.map((item) => {
-      if (item.LastCursorID > maxCurserID) {
-        maxCurserID = item.LastCursorID;
-      }
-
-      // eslint-disable-next-line no-param-reassign
-      delete item.LastCursorID;
-      return item;
+    rows.forEach(({ Count, PEntityID }) => {
+      cleaned[`${PEntityID}`] = Count;
     });
 
-    result.result.cursorID = maxCurserID;
+    result.result = cleaned;
 
     return result;
   }

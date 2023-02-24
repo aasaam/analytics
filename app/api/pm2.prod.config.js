@@ -18,12 +18,12 @@ module.exports = {
       error: '/dev/stderr',
       max_memory_restart: '256M',
     },
-    {
-      name: 'worker',
-      output: '/dev/stdout',
-      error: '/dev/stderr',
-      script: './app-worker.js',
-      instances: 1,
-    },
+    // {
+    //   name: 'worker',
+    //   output: '/dev/stdout',
+    //   error: '/dev/stderr',
+    //   script: './app-worker.js',
+    //   instances: 1,
+    // },
   ],
 };
